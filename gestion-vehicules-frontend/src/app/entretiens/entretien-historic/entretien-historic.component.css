@@ -1,0 +1,91 @@
+.historic-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.vehicule-card {
+  margin-bottom: 20px;
+}
+
+.entretien-panel {
+  margin-bottom: 10px;
+}
+
+.type {
+  font-weight: 500;
+  margin-right: 15px;
+}
+
+.date {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.entretien-details {
+  padding: 10px;
+}
+
+.detail-row {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.detail-label {
+  font-weight: 500;
+  min-width: 120px;
+}
+
+.statut-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.statut-planifié {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.statut-effectué {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.statut-annulé {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.statut-reporté {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  color: #666;
+}
+
+.no-results mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+}
+
+.no-results p {
+  margin: 0;
+  font-size: 1.1em;
+}

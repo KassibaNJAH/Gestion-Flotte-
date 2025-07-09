@@ -1,0 +1,74 @@
+.container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-container {
+  margin-bottom: 20px;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.vehicule-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.immatriculation {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.date-reelle {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.statut-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.statut-planifié {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.statut-effectué {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.statut-annulé {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.statut-reporté {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+.mat-column-actions {
+  width: 180px;
+  text-align: center;
+}
+
+button.mat-icon-button {
+  margin: 0 4px;
+}

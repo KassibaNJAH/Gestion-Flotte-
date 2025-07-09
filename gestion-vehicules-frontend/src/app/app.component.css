@@ -1,0 +1,49 @@
+.main-content {
+  margin-top: 70px; /* Ajustez cette valeur selon la hauteur de votre navbar */
+  min-height: calc(100vh - 70px); /* Pour que le footer reste en bas */
+}
+body {
+  padding-top: 80px; /* Doit correspondre à la hauteur de votre navbar */
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 60px; /* Hauteur réduite sur mobile */
+  }
+}
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  display: flex;
+  flex: 1;
+  margin-top: 60px; /* Hauteur de la navbar */
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 250px; /* Largeur de la sidebar */
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &.sidebar-collapsed {
+    margin-left: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    margin-top: 60px;
+  }
+  
+  .main-content {
+    margin-left: 0;
+    
+    &.sidebar-collapsed {
+      margin-left: 0;
+    }
+  }
+}

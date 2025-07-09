@@ -1,0 +1,79 @@
+<div class="form-container">
+  <h1>{{ isEditMode ? 'Modifier le contrôle technique' : 'Ajouter un contrôle technique' }}</h1>
+  
+  <form [formGroup]="controleForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Véhicule</mat-label>
+        <mat-select formControlName="vehicule_id" required>
+          <mat-option *ngFor="let vehicule of vehicules" [value]="vehicule.id">
+            {{ vehicule.marque }} {{ vehicule.modele }} ({{ vehicule.immatriculation }})
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="controleForm.get('vehicule_id')?.hasError('required')">
+          Le véhicule est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Date du contrôle</mat-label>
+        <input matInput [matDatepicker]="controlePicker" formControlName="date_controle" required>
+        <mat-datepicker-toggle matSuffix [for]="controlePicker"></mat-datepicker-toggle>
+        <mat-datepicker #controlePicker></mat-datepicker>
+        <mat-error *ngIf="controleForm.get('date_controle')?.hasError('required')">
+          La date du contrôle est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Date prochaine contrôle</mat-label>
+        <input matInput [matDatepicker]="prochainControlePicker" formControlName="date_prochaine_controle" required>
+        <mat-datepicker-toggle matSuffix [for]="prochainControlePicker"></mat-datepicker-toggle>
+        <mat-datepicker #prochainControlePicker></mat-datepicker>
+        <mat-error *ngIf="controleForm.get('date_prochaine_controle')?.hasError('required')">
+          La date du prochain contrôle est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Résultat</mat-label>
+        <mat-select formControlName="resultat" required>
+          <mat-option *ngFor="let resultat of resultats" [value]="resultat">
+            {{ resultat }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="controleForm.get('resultat')?.hasError('required')">
+          Le résultat est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Centre de contrôle</mat-label>
+        <input matInput formControlName="centre_controle" required>
+        <mat-error *ngIf="controleForm.get('centre_controle')?.hasError('required')">
+          Le centre de contrôle est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Notes</mat-label>
+        <textarea matInput formControlName="notes" rows="3"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      <button mat-raised-button type="button" (click)="router.navigate(['/controle-techniques'])">
+        Annuler
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!controleForm.valid">
+        {{ isEditMode ? 'Mettre à jour' : 'Enregistrer' }}
+      </button>
+    </div>
+  </form>
+</div>

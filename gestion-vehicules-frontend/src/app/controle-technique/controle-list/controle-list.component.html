@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="header">
+    <h1>Contrôles techniques</h1>
+    <button mat-raised-button color="primary" (click)="addControle()">
+      <mat-icon>add</mat-icon> Ajouter un contrôle
+    </button>
+  </div>
+
+  <div class="filter-container">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Rechercher</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filtrer les contrôles">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="table-container">
+    <mat-card>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Dates Column -->
+<ng-container matColumnDef="dates">
+  <th mat-header-cell *matHeaderCellDef>Dates</th>
+  <td mat-cell *matCellDef="let controle">
+    <div>Dernier: {{ controle.date_controle | date:'dd/MM/yyyy' }}</div>
+    <div>Prochain: {{ controle.date_prochaine_controle | date:'dd/MM/yyyy' }}</div>
+  </td>
+</ng-container>
+
+        <!-- Véhicule Column -->
+        <ng-container matColumnDef="vehicule">
+          <th mat-header-cell *matHeaderCellDef>Véhicule</th>
+          <td mat-cell *matCellDef="let controle">
+            <div class="vehicule-info">
+              <strong>{{ controle.vehicule?.marque }} {{ controle.vehicule?.modele }}</strong>
+              <div class="immatriculation">{{ controle.vehicule?.immatriculation }}</div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Jours restants Column -->
+        <ng-container matColumnDef="jours_restants">
+  <th mat-header-cell *matHeaderCellDef>Jours restants</th>
+  <td mat-cell *matCellDef="let controle">
+    <span class="jours-restants" 
+          [ngClass]="{
+            'expire-bientot': getJoursRestants(controle.date_prochaine_controle) <= 30 && getJoursRestants(controle.date_prochaine_controle) > 0,
+            'expire': getJoursRestants(controle.date_prochaine_controle) <= 0
+          }">
+      {{ getJoursRestants(controle.date_prochaine_controle) > 0 ? 
+          getJoursRestants(controle.date_prochaine_controle) + ' jours' : 
+          'Expiré' }}
+    </span>
+  </td>
+</ng-container>
+
+        <!-- Actions Column -->
+<ng-container matColumnDef="actions">
+  <th mat-header-cell *matHeaderCellDef>Actions</th>
+  <td mat-cell *matCellDef="let controle">
+    <div class="actions-container">
+      <button mat-icon-button color="primary" (click)="editControle(controle.id)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteControle(controle.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </td>
+</ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+  </div>
+</div>

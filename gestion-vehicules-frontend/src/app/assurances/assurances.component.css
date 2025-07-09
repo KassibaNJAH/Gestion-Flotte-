@@ -1,0 +1,110 @@
+.assurance-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
+.header {
+  margin-bottom: 30px;
+  border-bottom: 2px solid #3f51b5;
+  padding-bottom: 10px;
+}
+
+.header h1 {
+  color: #3f51b5;
+  margin: 0;
+  font-weight: 500;
+}
+
+.header h2 {
+  color: #666;
+  margin: 5px 0 0 0;
+  font-weight: 400;
+}
+
+.search-section {
+  margin: 20px 0;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 500px;
+}
+
+.table-container {
+  margin: 30px 0;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th.mat-header-cell {
+  background-color: #3f51b5;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 12px 16px !important;
+}
+
+td.mat-cell {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+tr.mat-row:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+tr.mat-row:hover {
+  background-color: #e3f2fd;
+}
+
+.user-info {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.role {
+  font-weight: 500;
+  color: #3f51b5;
+  margin-right: 15px;
+}
+
+.position {
+  color: #666;
+  font-style: italic;
+}
+
+/* Couleurs harmonisées */
+.mat-primary {
+  color: #3f51b5;
+}
+
+.mat-warn {
+  color: #f44336;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .header h2 {
+    font-size: 1.2rem;
+  }
+  
+  th.mat-header-cell, 
+  td.mat-cell {
+    padding: 8px 12px !important;
+    font-size: 0.9rem;
+  }
+}

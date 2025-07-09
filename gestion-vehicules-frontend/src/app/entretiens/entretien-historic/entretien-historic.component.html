@@ -1,0 +1,72 @@
+<div class="historic-container">
+  <div class="header">
+    <button mat-icon-button (click)="router.navigate(['/entretiens'])">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Historique des entretiens</h1>
+  </div>
+
+  <mat-card *ngIf="vehicule" class="vehicule-card">
+    <mat-card-header>
+      <mat-card-title>{{ vehicule.marque }} {{ vehicule.modele }}</mat-card-title>
+      <mat-card-subtitle>{{ vehicule.immatriculation }} • Année: {{ vehicule.annee }}</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+    <mat-accordion *ngIf="!loading">
+      <mat-expansion-panel *ngFor="let entretien of entretiens" class="entretien-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span class="type">{{ entretien.type_entretien }}</span>
+            <span class="date">{{ entretien.date_prevue | date:'dd/MM/yyyy' }}</span>
+          </mat-panel-title>
+          <mat-panel-description>
+            <span class="statut-badge" [ngClass]="'statut-' + entretien.statut">
+              {{ getStatutLabel(entretien.statut) }}
+            </span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="entretien-details">
+          <div class="detail-row">
+            <span class="detail-label">Date prévue:</span>
+            <span>{{ entretien.date_prevue | date:'dd/MM/yyyy' }}</span>
+          </div>
+          
+          <div class="detail-row" *ngIf="entretien.date_reelle">
+            <span class="detail-label">Date réelle:</span>
+            <span>{{ entretien.date_reelle | date:'dd/MM/yyyy' }}</span>
+          </div>
+          
+          <div class="detail-row" *ngIf="entretien.kilometrage">
+            <span class="detail-label">Kilométrage:</span>
+            <span>{{ entretien.kilometrage }} km</span>
+          </div>
+          
+          <div class="detail-row" *ngIf="entretien.cout">
+            <span class="detail-label">Coût:</span>
+            <span>{{ entretien.cout }} €</span>
+          </div>
+          
+          <div class="detail-row" *ngIf="entretien.description">
+            <span class="detail-label">Description:</span>
+            <span>{{ entretien.description }}</span>
+          </div>
+          
+          <div class="detail-row" *ngIf="entretien.notes">
+            <span class="detail-label">Notes:</span>
+            <span>{{ entretien.notes }}</span>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div *ngIf="!loading && entretiens.length === 0" class="no-results">
+      <mat-icon>info</mat-icon>
+      <p>Aucun entretien enregistré pour ce véhicule</p>
+    </div>
+  </mat-card>
+</div>

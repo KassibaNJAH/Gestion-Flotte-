@@ -1,0 +1,45 @@
+.container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-actions {
+  width: 120px;
+  text-align: center;
+}
+
+button.mat-icon-button {
+  margin: 0 4px;
+}
+/* Dans votre fichier de style du composant */
+.actions-header {
+  text-align: center;
+  justify-content: center;
+}
+
+.actions-cell {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+/* Optionnel : pour une meilleure apparence au survol */
+.actions-cell button:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}

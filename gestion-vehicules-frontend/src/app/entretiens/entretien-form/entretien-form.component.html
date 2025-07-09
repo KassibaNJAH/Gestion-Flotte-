@@ -1,0 +1,107 @@
+<div class="form-container">
+  <h1>{{ isEditMode ? 'Modifier un entretien' : 'Planifier un nouvel entretien' }}</h1>
+  
+  <form [formGroup]="entretienForm" (ngSubmit)="onSubmit()" class="entretien-form">
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Véhicule</mat-label>
+        <mat-select formControlName="vehicule_id" required>
+          <mat-option *ngFor="let vehicule of vehicules" [value]="vehicule.id">
+            {{ vehicule.marque }} {{ vehicule.modele }} ({{ vehicule.immatriculation }})
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="entretienForm.get('vehicule_id')?.hasError('required')">
+          Le véhicule est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Type d'entretien</mat-label>
+        <mat-select formControlName="type_entretien" required>
+          <mat-option *ngFor="let type of typesEntretien" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="entretienForm.get('type_entretien')?.hasError('required')">
+          Le type d'entretien est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Date prévue</mat-label>
+        <input matInput [matDatepicker]="pickerPrevue" formControlName="date_prevue" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerPrevue"></mat-datepicker-toggle>
+        <mat-datepicker #pickerPrevue></mat-datepicker>
+        <mat-error *ngIf="entretienForm.get('date_prevue')?.hasError('required')">
+          La date prévue est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Statut</mat-label>
+        <mat-select formControlName="statut" required (selectionChange)="onStatutChange()">
+          <mat-option *ngFor="let statut of statuts | keyvalue" [value]="statut.key">
+            {{ statut.value }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="entretienForm.get('statut')?.hasError('required')">
+          Le statut est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row" *ngIf="entretienForm.get('statut')?.value === 'effectué'">
+      <mat-form-field appearance="fill">
+        <mat-label>Date réelle</mat-label>
+        <input matInput [matDatepicker]="pickerReelle" formControlName="date_reelle">
+        <mat-datepicker-toggle matSuffix [for]="pickerReelle"></mat-datepicker-toggle>
+        <mat-datepicker #pickerReelle></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Kilométrage</mat-label>
+        <input matInput type="number" formControlName="kilometrage">
+        <span matSuffix>km</span>
+        <mat-error *ngIf="entretienForm.get('kilometrage')?.hasError('min')">
+          Le kilométrage ne peut pas être négatif
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Coût</mat-label>
+        <input matInput type="number" formControlName="cout">
+        <span matSuffix>€</span>
+        <mat-error *ngIf="entretienForm.get('cout')?.hasError('min')">
+          Le coût ne peut pas être négatif
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="2"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Notes</mat-label>
+        <textarea matInput formControlName="notes" rows="3"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      <button mat-raised-button type="button" (click)="router.navigate(['/entretiens'])">
+        Annuler
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!entretienForm.valid">
+        {{ isEditMode ? 'Mettre à jour' : 'Enregistrer' }}
+      </button>
+    </div>
+  </form>
+</div>

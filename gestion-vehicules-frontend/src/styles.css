@@ -1,0 +1,112 @@
+/* Structure principale */
+:root {
+  color-scheme: light dark;
+}
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Prend toute la hauteur de l'écran */
+}
+
+.content-wrapper {
+  flex: 1; /* Prend tout l'espace disponible */
+  padding: 20px;
+}
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* Styles globaux */
+html, body { 
+  height: 100%; 
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+  padding: 20px;
+}
+
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Amélioration de la lisibilité des formulaires */
+.mat-form-field {
+  width: 100%;
+}
+
+/* Espacement des boutons */
+button.mat-button, button.mat-raised-button {
+  margin-right: 8px;
+}
+
+/* Style pour les cartes */
+.mat-card {
+  margin-bottom: 20px;
+}
+
+/* Style pour les tables */
+.mat-table {
+  width: 100%;
+}
+
+/* Style pour les badges de statut */
+.statut-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+/* Navigation */
+nav {
+  margin-left: auto;
+  display: flex;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+nav a.mat-button {
+  color: white;
+}
+
+/* Contenu principal */
+.main-content {
+  padding: 20px;
+}
+
+.notification-urgence {
+  background-color: #d32f2f !important;
+  color: white !important;
+}
+
+.notification-important {
+  background-color: #f57c00 !important;
+  color: white !important;
+}
+
+.notification-rappel {
+  background-color: #ffa000 !important;
+  color: white !important;
+}
+
+.notification-info {
+  background-color: #1976d2 !important;
+  color: white !important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Amélioration de l'apparence des notifications */
+.mat-menu-panel.alertes-menu {
+  max-width: 350px !important;
+  min-width: 250px !important;
+}

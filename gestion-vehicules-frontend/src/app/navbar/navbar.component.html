@@ -1,0 +1,45 @@
+<nav class="full-width-navbar">
+  <div class="navbar-container">
+
+    <div class="spacer"></div>
+
+    <div class="nav-items-container">
+      <button mat-button [class.active]="isActive('dashboard')" (click)="navigateTo('dashboard')">
+        <mat-icon class="nav-icon">dashboard</mat-icon>
+        <span class="nav-label">Tableau de bord</span>
+      </button>
+
+      <!-- Élément Alertes avec texte à gauche du composant -->
+      
+        <app-alertes-menu class="alerts-menu-icon"></app-alertes-menu>
+    
+
+      <button mat-button [class.active]="isActive('help')" (click)="navigateTo('help')">
+        <mat-icon class="nav-icon">help</mat-icon>
+        <span class="nav-label">Aide</span>
+      </button>
+    </div>
+
+    <div class="user-section">
+      <button mat-icon-button [matMenuTriggerFor]="userMenu" class="avatar-button">
+        <div class="avatar-container">
+          <img src="assets/images/avatar.jpg" alt="User Avatar" class="avatar-image">
+        </div>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>account_circle</mat-icon>
+          <span>Profil</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>Paramètres</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>logout</mat-icon>
+          <span>Déconnexion</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</nav>

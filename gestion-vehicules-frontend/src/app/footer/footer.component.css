@@ -1,0 +1,29 @@
+/* Structure principale */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Hauteur minimum = hauteur de la fenêtre */
+}
+
+/* Zone de contenu principale */
+.content-wrapper {
+  flex: 1; /* Prend tout l'espace vertical restant */
+  padding: 20px;
+}
+
+/* Footer collé en bas */
+.simple-footer, .main-footer {
+  background: #2c3e50;
+  color: #ecf0f1;
+  padding: 15px 0;
+  text-align: center;
+  width: 100%;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Optionnel : style spécifique pour .footer-content si tu en as besoin */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}

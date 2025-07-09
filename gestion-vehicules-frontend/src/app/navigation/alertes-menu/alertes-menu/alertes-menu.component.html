@@ -1,0 +1,52 @@
+<button mat-button [matMenuTriggerFor]="alertesMenu" matTooltip="Alertes" class="alert-button">
+  <mat-icon [matBadge]="(alerteService.alertes$ | async)?.length || 0" 
+            matBadgeColor="warn"
+            matBadgeSize="small"
+            class="alert-icon">
+    notifications
+  </mat-icon>
+  <span class="alert-text">Alertes</span>
+</button>
+
+<mat-menu #alertesMenu="matMenu" class="alertes-menu" xPosition="before">
+  <div class="menu-header">
+    <h3>Alertes <span class="alert-count">({{ (alerteService.alertes$ | async)?.length || 0 }})</span></h3>
+    <button mat-icon-button (click)="alerteService.loadAlertes(); $event.stopPropagation()" 
+            matTooltip="Actualiser" >
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <ng-container *ngIf="alerteService.alertes$ | async as alertes">
+    <div *ngIf="alertes.length === 0" class="no-alertes">
+      <mat-icon>check_circle</mat-icon>
+      <p>Aucune alerte active</p>
+    </div>
+
+    <div *ngFor="let alerte of alertes" class="alerte-item">
+      <div class="alerte-content" (click)="voirVehicule(alerte.vehicule_id, $event)">
+        <div class="alerte-icon {{getUrgenceClass(alerte.urgence)}}">
+          <mat-icon>{{ getUrgenceIcon(alerte.urgence) }}</mat-icon>
+        </div>
+        <div class="alerte-details">
+          <div class="alerte-message">{{ alerte.message }}</div>
+          <div class="alerte-meta">
+            {{ alerte.marque }} {{ alerte.modele }} ({{ alerte.immatriculation }})
+          </div>
+        </div>
+      </div>
+      <div class="alerte-actions">
+        <button mat-icon-button (click)="marquerCommeLue(alerte.id, $event)"
+                matTooltip="Marquer comme lue" color="primary">
+          <mat-icon>check_circle</mat-icon>
+        </button>
+        <button mat-icon-button (click)="voirVehicule(alerte.vehicule_id, $event)"
+                matTooltip="Voir véhicule" color="accent">
+          <mat-icon>directions_car</mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</mat-menu>

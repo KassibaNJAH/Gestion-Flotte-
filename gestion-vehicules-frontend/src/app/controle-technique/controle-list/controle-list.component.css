@@ -1,0 +1,82 @@
+.container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-container {
+  margin-bottom: 20px;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.vehicule-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.immatriculation {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.jours-restants {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 400;
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.jours-restants.expire-bientot {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.jours-restants.expire {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.mat-column-actions {
+  width: 120px;
+  text-align: center;
+}
+
+button.mat-icon-button {
+  margin: 0 4px;
+}
+.jours-restants {
+  padding: 4px 8px;
+  border-radius: 30px;
+}
+
+.expire-bientot {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.expire {
+  background-color: #ffebee;
+  color: #c62828;
+  font-weight: bold;
+}
+
+.actions-container {
+  display: flex;
+  gap: 8px; 
+  justify-content: center; 
+  align-items: center; 
+}

@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="header">
+    <h1>Gestion des assurances</h1>
+    <button mat-raised-button color="primary" (click)="addAssurance()">
+      <mat-icon>add</mat-icon> Ajouter une assurance
+    </button>
+  </div>
+
+  <div class="filter-container">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Rechercher</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filtrer les assurances">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="table-container">
+    <mat-card>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Numéro Contrat Column -->
+        <ng-container matColumnDef="numero_contrat">
+          <th mat-header-cell *matHeaderCellDef>N° Contrat</th>
+          <td mat-cell *matCellDef="let assurance">{{ assurance.numero_contrat }}</td>
+        </ng-container>
+
+        <!-- Assureur Column -->
+        <ng-container matColumnDef="assureur">
+          <th mat-header-cell *matHeaderCellDef>Assureur</th>
+          <td mat-cell *matCellDef="let assurance">{{ assurance.assureur }}</td>
+        </ng-container>
+
+        <!-- Dates Column -->
+        <ng-container matColumnDef="dates">
+          <th mat-header-cell *matHeaderCellDef>Période</th>
+          <td mat-cell *matCellDef="let assurance">
+            <div>{{ assurance.date_debut | date:'dd/MM/yyyy' }} - {{ assurance.date_fin | date:'dd/MM/yyyy' }}</div>
+            <div class="jours-restants" [ngClass]="{'expire-bientot': getJoursRestants(assurance.date_fin) <= 30, 'expire': getJoursRestants(assurance.date_fin) <= 0}">
+              {{ getJoursRestants(assurance.date_fin) > 0 ? getJoursRestants(assurance.date_fin) + ' jours restants' : 'Expirée' }}
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Prix Column -->
+        <ng-container matColumnDef="prix">
+          <th mat-header-cell *matHeaderCellDef>Prix</th>
+          <td mat-cell *matCellDef="let assurance">{{ assurance.prix }} €</td>
+        </ng-container>
+
+        <!-- Véhicule Column -->
+        <ng-container matColumnDef="vehicule">
+          <th mat-header-cell *matHeaderCellDef>Véhicule</th>
+          <td mat-cell *matCellDef="let assurance">
+            <div class="vehicule-info">
+              <strong>{{ assurance.vehicule?.marque }} {{ assurance.vehicule?.modele }}</strong>
+              <div class="immatriculation">{{ assurance.vehicule?.immatriculation }}</div>
+            </div>
+          </td>
+        </ng-container>
+
+    <ng-container matColumnDef="actions">
+  <th mat-header-cell *matHeaderCellDef class="actions-header">Actions</th>
+  <td mat-cell *matCellDef="let assurance" class="actions-cell">
+    <div class="actions-buttons">
+      <button mat-icon-button color="primary" (click)="editAssurance(assurance.id)" matTooltip="Modifier">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteAssurance(assurance.id)" matTooltip="Supprimer">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </td>
+</ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+  </div>
+</div>

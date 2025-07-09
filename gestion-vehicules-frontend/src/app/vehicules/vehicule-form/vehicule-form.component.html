@@ -1,0 +1,90 @@
+<div class="form-container">
+  <h1>{{ isEditMode ? 'Modifier un véhicule' : 'Ajouter un nouveau véhicule' }}</h1>
+  
+  <form [formGroup]="vehiculeForm" (ngSubmit)="onSubmit()" class="vehicule-form">
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Marque</mat-label>
+        <input matInput formControlName="marque" required>
+        <mat-error *ngIf="vehiculeForm.get('marque')?.hasError('required')">
+          La marque est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Modèle</mat-label>
+        <input matInput formControlName="modele" required>
+        <mat-error *ngIf="vehiculeForm.get('modele')?.hasError('required')">
+          Le modèle est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Immatriculation</mat-label>
+        <input matInput formControlName="immatriculation" required>
+        <mat-error *ngIf="vehiculeForm.get('immatriculation')?.hasError('required')">
+          L'immatriculation est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Année</mat-label>
+        <input matInput type="number" formControlName="annee" required>
+        <mat-error *ngIf="vehiculeForm.get('annee')?.hasError('required')">
+          L'année est obligatoire
+        </mat-error>
+        <mat-error *ngIf="vehiculeForm.get('annee')?.hasError('min') || vehiculeForm.get('annee')?.hasError('max')">
+          L'année doit être entre 1900 et {{ currentYear + 1 }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Date d'achat</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date_achat">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Kilométrage</mat-label>
+        <input matInput type="number" formControlName="kilometrage">
+        <mat-error *ngIf="vehiculeForm.get('kilometrage')?.hasError('min')">
+          Le kilométrage ne peut pas être négatif
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Type de carburant</mat-label>
+        <mat-select formControlName="carburant_type">
+          <mat-option value="Essence">Essence</mat-option>
+          <mat-option value="Diesel">Diesel</mat-option>
+          <mat-option value="Hybride">Hybride</mat-option>
+          <mat-option value="Électrique">Électrique</mat-option>
+          <mat-option value="GPL">GPL</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="notes-field">
+        <mat-label>Notes</mat-label>
+        <textarea matInput formControlName="notes" rows="3"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      <button mat-raised-button type="button" (click)="router.navigate(['/vehicules'])">
+        Annuler
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!vehiculeForm.valid">
+        {{ isEditMode ? 'Mettre à jour' : 'Enregistrer' }}
+      </button>
+    </div>
+  </form>
+</div>

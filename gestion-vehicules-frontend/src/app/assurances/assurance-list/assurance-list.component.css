@@ -1,0 +1,92 @@
+.container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-container {
+  margin-bottom: 20px;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.vehicule-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.immatriculation {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.jours-restants {
+  font-size: 0.8em;
+  padding: 2px 6px;
+  border-radius: 10px;
+  display: inline-block;
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.jours-restants.expire-bientot {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.jours-restants.expire {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.mat-column-actions {
+  width: 120px;
+  text-align: center;
+}
+
+button.mat-icon-button {
+  margin: 0 4px;
+}
+/* Style pour l'en-tête de la colonne Actions */
+.actions-header {
+  text-align: center !important;
+}
+
+/* Style pour la cellule contenant les boutons */
+.actions-cell {
+  text-align: center;
+  padding: 0 8px !important;
+}
+
+/* Conteneur des boutons */
+.actions-buttons {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style optionnel pour les boutons */
+.actions-buttons button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions-buttons button mat-icon {
+  font-size: 20px;
+}

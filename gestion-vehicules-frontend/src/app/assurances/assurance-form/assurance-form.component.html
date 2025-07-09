@@ -1,0 +1,89 @@
+<div class="form-container">
+  <h1>{{ isEditMode ? 'Modifier une assurance' : 'Ajouter une nouvelle assurance' }}</h1>
+  
+  <form [formGroup]="assuranceForm" (ngSubmit)="onSubmit()" class="assurance-form">
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Véhicule</mat-label>
+        <mat-select formControlName="vehicule_id" required>
+          <mat-option *ngFor="let vehicule of vehicules" [value]="vehicule.id">
+            {{ vehicule.marque }} {{ vehicule.modele }} ({{ vehicule.immatriculation }})
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="assuranceForm.get('vehicule_id')?.hasError('required')">
+          Le véhicule est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Numéro de contrat</mat-label>
+        <input matInput formControlName="numero_contrat" required>
+        <mat-error *ngIf="assuranceForm.get('numero_contrat')?.hasError('required')">
+          Le numéro de contrat est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Assureur</mat-label>
+        <input matInput formControlName="assureur" required>
+        <mat-error *ngIf="assuranceForm.get('assureur')?.hasError('required')">
+          L'assureur est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Date de début</mat-label>
+        <input matInput [matDatepicker]="pickerDebut" formControlName="date_debut" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
+        <mat-datepicker #pickerDebut></mat-datepicker>
+        <mat-error *ngIf="assuranceForm.get('date_debut')?.hasError('required')">
+          La date de début est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Date de fin</mat-label>
+        <input matInput [matDatepicker]="pickerFin" formControlName="date_fin" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFin></mat-datepicker>
+        <mat-error *ngIf="assuranceForm.get('date_fin')?.hasError('required')">
+          La date de fin est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Prix</mat-label>
+        <input matInput type="number" formControlName="prix" required>
+        <span matSuffix>€</span>
+        <mat-error *ngIf="assuranceForm.get('prix')?.hasError('required')">
+          Le prix est obligatoire
+        </mat-error>
+        <mat-error *ngIf="assuranceForm.get('prix')?.hasError('min')">
+          Le prix ne peut pas être négatif
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Notes</mat-label>
+        <textarea matInput formControlName="notes" rows="3"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      <button mat-raised-button type="button" (click)="router.navigate(['/assurances'])">
+        Annuler
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!assuranceForm.valid">
+        {{ isEditMode ? 'Mettre à jour' : 'Enregistrer' }}
+      </button>
+    </div>
+  </form>
+</div>

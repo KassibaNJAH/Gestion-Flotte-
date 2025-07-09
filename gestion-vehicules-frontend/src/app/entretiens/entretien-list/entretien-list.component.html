@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="header">
+    <h1>Gestion des entretiens</h1>
+    <button mat-raised-button color="primary" (click)="addEntretien()">
+      <mat-icon>add</mat-icon> Planifier un entretien
+    </button>
+  </div>
+
+  <div class="filter-container">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Rechercher</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filtrer les entretiens">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="table-container">
+    <mat-card>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Véhicule Column -->
+        <ng-container matColumnDef="vehicule">
+          <th mat-header-cell *matHeaderCellDef>Véhicule</th>
+          <td mat-cell *matCellDef="let entretien">
+            <div class="vehicule-info">
+              <strong>{{ entretien.vehicule?.marque }} {{ entretien.vehicule?.modele }}</strong>
+              <div class="immatriculation">{{ entretien.vehicule?.immatriculation }}</div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let entretien">{{ entretien.type_entretien }}</td>
+        </ng-container>
+
+        <!-- Date prévue Column -->
+        <ng-container matColumnDef="date_prevue">
+          <th mat-header-cell *matHeaderCellDef>Date prévue</th>
+          <td mat-cell *matCellDef="let entretien">
+            {{ entretien.date_prevue | date:'dd/MM/yyyy' }}
+            <div *ngIf="entretien.date_reelle" class="date-reelle">
+              (Effectué le {{ entretien.date_reelle | date:'dd/MM/yyyy' }})
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Statut Column -->
+        <ng-container matColumnDef="statut">
+          <th mat-header-cell *matHeaderCellDef>Statut</th>
+          <td mat-cell *matCellDef="let entretien">
+            <span class="statut-badge" [ngClass]="'statut-' + entretien.statut">
+              {{ getStatutLabel(entretien.statut) }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let entretien">
+            <button mat-icon-button color="primary" (click)="editEntretien(entretien.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteEntretien(entretien.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" 
+                    (click)="viewHistoric(entretien.vehicule_id)" 
+                    matTooltip="Voir l'historique">
+              <mat-icon>history</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="sidebar" [class.collapsed]="isCollapsed">
+  <div class="sidebar-header">
+    <div class="logo" (click)="navigateTo('/')">
+      <span *ngIf="!isCollapsed">Gestion Flotte</span>
+    </div>
+    <button mat-icon-button class="toggle-btn" (click)="toggleSidebar.emit()">
+      <mat-icon>{{ isCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+    </button>
+  </div>
+
+  <div class="sidebar-menu">
+    <div class="menu-item" *ngFor="let item of menuItems" 
+         [class.active]="isActive(item.route)"
+         [class.expanded]="item.expanded"
+         (click)="toggleSubMenu($event, item)">
+      
+      <div class="menu-item-content">
+        <mat-icon class="menu-icon">{{item.icon}}</mat-icon>
+        <span class="menu-label" *ngIf="!isCollapsed">{{item.label}}</span>
+        <span class="menu-badge" *ngIf="item.badge && !isCollapsed">{{item.badge}}</span>
+        <mat-icon class="expand-icon" *ngIf="item.subItems?.length && !isCollapsed">
+          {{item.expanded ? 'expand_less' : 'expand_more'}}
+        </mat-icon>
+      </div>
+
+      <div class="submenu" *ngIf="item.expanded && !isCollapsed && item.subItems?.length">
+        <div class="submenu-item" *ngFor="let subItem of item.subItems"
+             [class.active]="isActive(subItem.route)"
+             (click)="navigateTo(subItem.route)">
+          {{subItem.label}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-footer" *ngIf="!isCollapsed">
+    <div class="user-info">
+      <div class="user-avatar">
+        <img src="assets/images/avatar.jpg" alt="User Avatar">
+      </div>
+      <div class="user-details">
+        <div class="user-name">Admin</div>
+        <div class="user-role">Administrateur</div>
+      </div>
+    </div>
+  </div>
+</div>
